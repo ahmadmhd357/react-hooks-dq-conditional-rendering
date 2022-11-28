@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import MenuBar from "./MenuBar";
 import { Profile, Photos, Cocktails, Pokemon } from "./pages";
 
 function MainBox() {
+  const [activeMenue, setActiveMenue] = useState(null)
+  
   /*
     Replace the code below! Depending on what menu item is selected in the menu, 
     I should render either a Profile, Photos, Cocktails, or Pokemon component.
@@ -11,13 +13,19 @@ function MainBox() {
     - Which component should have methods to control state? 
     - Where should these methods be called?
   */
-
-  let detailsToDisplay = <div>Hi, I'm a div!</div>;
-
+  
+  function handlSetMenue(event){
+    if (event.target.id === "user" ){setActiveMenue(()=> <Profile />) }
+    else if(event.target.id === "photo"){setActiveMenue(()=><Photos />)}
+    else if(event.target.id === "cocktail"){setActiveMenue(()=><Cocktails />)}
+    else if(event.target.id === "pokemon"){setActiveMenue(()=><Pokemon />)}
+  }
+  
+  
   return (
     <div>
-      <MenuBar />
-      {detailsToDisplay}
+      <MenuBar onSetMenue={handlSetMenue}  />
+      {activeMenue}
     </div>
   );
 }

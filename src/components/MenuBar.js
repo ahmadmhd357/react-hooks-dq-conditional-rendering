@@ -1,6 +1,6 @@
-import React from "react";
-
-function MenuBar(props) {
+import React, {useState} from "react";
+function MenuBar({onSetMenue}) {
+  const [active,setActive] = useState('')
   /*
 
   The 'span' tags below are the menu items. Think about the way a menu 
@@ -11,22 +11,25 @@ function MenuBar(props) {
   this component be made aware of what is currently the active menu item?
 
   */
-
+  function handlClick(event){
+    setActive(event.target.id)
+    onSetMenue(event)
+  }
   return (
     <div className="ui four item menu">
-      <span className="item active">
-        <i className="user large icon" />
+      <span id="user" className={active==='user'?'item active':'item'} onClick={handlClick} >
+        <i className="user large icon"  />
       </span>
 
-      <span className="item">
-        <i className="photo large icon" />
+      <span id="photo" className={active==='photo'?'item active':'item'} onClick={handlClick}  >
+        <i className="photo large icon"/>
       </span>
 
-      <span className="item">
-        <i className="cocktail large icon" />
+      <span id="cocktail" className={active==='cocktail'?'item active':'item'} onClick={handlClick}  >
+        <i className="cocktail large icon"/>
       </span>
 
-      <span className="item">
+      <span id="pokemon" className={active==='pokemon'?'item active':'item'} onClick={handlClick}  >
         <i className=" themeisle large icon" />
       </span>
     </div>
